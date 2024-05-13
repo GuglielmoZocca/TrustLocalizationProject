@@ -1,0 +1,23 @@
+obj_evb1000/process.o: \
+ /Users/parallels/contiki-uwb/contiki/core/sys/process.c \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/process.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/pt.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc-switch.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc.h \
+ /Users/parallels/contiki-uwb/platform/evb1000/./contiki-conf.h \
+ project-conf.h \
+ /Users/parallels/contiki-uwb/platform/evb1000/./platform-conf.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc-gcc.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/arg.h
+ /Users/parallels/contiki-uwb/contiki/core/sys/process.c :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/process.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/pt.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc-switch.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc.h :
+ /Users/parallels/contiki-uwb/platform/evb1000/./contiki-conf.h :
+ project-conf.h :
+ /Users/parallels/contiki-uwb/platform/evb1000/./platform-conf.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc-gcc.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/arg.h :

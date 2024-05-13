@@ -1,0 +1,37 @@
+obj_evb1000/route.o: \
+ /Users/parallels/contiki-uwb/contiki/core/net/rime/route.c \
+ /Users/parallels/contiki-uwb/contiki/core/./lib/list.h \
+ /Users/parallels/contiki-uwb/contiki/core/./lib/memb.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc.h \
+ /Users/parallels/contiki-uwb/platform/evb1000/./contiki-conf.h \
+ project-conf.h \
+ /Users/parallels/contiki-uwb/platform/evb1000/./platform-conf.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc-gcc.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/ctimer.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/etimer.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/timer.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/clock.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/process.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/pt.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc.h \
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc-switch.h \
+ /Users/parallels/contiki-uwb/contiki/core/./net/rime/route.h \
+ /Users/parallels/contiki-uwb/contiki/core/./net/linkaddr.h
+ /Users/parallels/contiki-uwb/contiki/core/net/rime/route.c :
+ /Users/parallels/contiki-uwb/contiki/core/./lib/list.h :
+ /Users/parallels/contiki-uwb/contiki/core/./lib/memb.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc.h :
+ /Users/parallels/contiki-uwb/platform/evb1000/./contiki-conf.h :
+ project-conf.h :
+ /Users/parallels/contiki-uwb/platform/evb1000/./platform-conf.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/cc-gcc.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/ctimer.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/etimer.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/timer.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/clock.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/process.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/pt.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc.h :
+ /Users/parallels/contiki-uwb/contiki/core/./sys/lc-switch.h :
+ /Users/parallels/contiki-uwb/contiki/core/./net/rime/route.h :
+ /Users/parallels/contiki-uwb/contiki/core/./net/linkaddr.h :

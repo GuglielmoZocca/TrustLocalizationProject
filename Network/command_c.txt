@@ -1,0 +1,71 @@
+//create devices
+
+export ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"3\",\"coordinateX\":5,\"coordinateY\":8,\"Key\":\"P\",\"Neighborhood\":[\"1\",\"2\"],\"Reputation\":5}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"CreateDevice","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+export ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"1\",\"coordinateX\":3,\"coordinateY\":2,\"Key\":\"P\",\"Neighborhood\":[\"2\",\"3\"],\"Reputation\":5}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"CreateDevice","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+export ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"2\",\"coordinateX\":10,\"coordinateY\":4,\"Key\":\"P\",\"Neighborhood\":[\"3\",\"1\"],\"Reputation\":5}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"CreateDevice","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+//set confidence and observation
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"2\",\"observation\":4123,\"Confidence\":1,\"MinConf\":0.4,\"MaxConf\":1}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"UpdateDeviceObsConf","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"1\",\"observation\":4242,\"Confidence\":1,\"MinConf\":0.4,\"MaxConf\":1}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"UpdateDeviceObsConf","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"3\",\"observation\":3162,\"Confidence\":1,\"MinConf\":0.4,\"MaxConf\":1}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"UpdateDeviceObsConf","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+//set evidence and reputation
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"2\",\"PRH\":2,\"PRL\":1,\"threashConf\":0.7,\"threashEv\":0,\"maxRep\":20}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"UpdateDeviceEvRep","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"1\",\"PRH\":2,\"PRL\":1,\"threashConf\":0.7,\"threashEv\":0,\"maxRep\":20}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"UpdateDeviceEvRep","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"3\",\"PRH\":2,\"PRL\":1,\"threashConf\":0.7,\"threashEv\":0,\"maxRep\":20}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"UpdateDeviceEvRep","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"Device_properties\":\"$ASSET_PROPERTIES\"}"
+
+//Create target
+
+ASSET_PROPERTIES=$(echo -n "{\"TargetID\":\"1\"}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"CreateTarget","Args":["TargetOrg1PrivateCollection"]}' --transient "{\"Target_properties\":\"$ASSET_PROPERTIES\"}"
+
+//Calculate position target
+
+ASSET_PROPERTIES=$(echo -n "{\"TargetID\":\"1\",\"ThreshErr\":0.01,\"DevicesUp\":[\"1\",\"2\",\"3\"]}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"PositionTarget","Args":["DeviceAdmin1PrivateCollection","TargetOrg1PrivateCollection","5/10/2024"]}' --transient "{\"target_Posisiton\":\"$ASSET_PROPERTIES\"}"
+
+//read a device
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"2\"}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"ReadDevice","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"device_data\":\"$ASSET_PROPERTIES\"}"
+
+//read a target
+
+ASSET_PROPERTIES=$(echo -n "{\"TargetID\":\"7\"}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"ReadTarget","Args":["TargetOrg1PrivateCollection"]}' --transient "{\"target_data\":\"$ASSET_PROPERTIES\"}"
+
+//delete device
+
+ASSET_PROPERTIES=$(echo -n "{\"deviceID\":\"10:89\"}" | base64 | tr -d \\n)
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n Position -c '{"function":"DeleteDevice","Args":["DeviceAdmin1PrivateCollection"]}' --transient "{\"device_delete\":\"$ASSET_PROPERTIES\"}"

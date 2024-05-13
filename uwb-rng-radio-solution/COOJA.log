@@ -1,0 +1,4 @@
+[12:47:39 - AWT-EventQueue-0] [Cooja.java:2858] [INFO] - External tools default settings: /external_tools_macosx.config
+[12:47:39 - AWT-EventQueue-0] [Cooja.java:2888] [INFO] - External tools user settings: /Users/parallels/.cooja.user.properties
+[12:47:48 - AWT-EventQueue-0] [Simulation.java:422] [INFO] - Simulation random seed: 123456
+[12:47:48 - AWT-EventQueue-0] [Visualizer.java:256] [INFO] - Registered external visualizer: org.contikios.cooja.plugins.skins.DGRMVisualizerSkin

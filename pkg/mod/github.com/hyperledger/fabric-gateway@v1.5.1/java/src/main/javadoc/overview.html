@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>API Overview</title>
+  </head>
+  <body>
+    <p>
+      The Fabric Gateway SDK allows applications to interact with a Fabric blockchain network. It provides a simple API
+      to submit transactions to a ledger or query the contents of a ledger with minimal code. The Gateway SDK implements
+      the Fabric programming model as described in the
+      <a href="https://hyperledger-fabric.readthedocs.io/en/latest/write_first_app.html">
+        Running a Fabric Application
+      </a>
+      tutorial of the Fabric documentation.
+    </p>
+
+    <p>
+      Client applications interact with the blockchain network using a Fabric Gateway. A session for a given client
+      identity is established by building and connecting to a Fabric Gateway using a gRPC connection to the Gateway
+      endpoint, client identity, and client signing implementation. The returned
+      <code>Gateway</code> enables interaction with any of the blockchain <code>Networks</code> (channels) accessible
+      through the Fabric Gateway. This in turn provides access to Smart <code>Contracts</code> within chaincode deployed
+      to that blockchain network, and to which transactions can be submitted or queries can be evaluated.
+    </p>
+
+    <p>
+      gRPC connections to a Fabric Gateway may be shared by all <code>Gateway</code> instances interacting with that
+      Fabric Gateway.
+    </p>
+
+    <p>
+      The following shows a complete code sample of how to connect to a fabric network, submit a transaction and query
+      the ledger state using an instantiated smart contract.
+    </p>
+
+    <pre><code>
+    import io.grpc.Grpc;
+    import io.grpc.ManagedChannel;
+    import io.grpc.TlsChannelCredentials;
+    import org.hyperledger.fabric.client.*;
+    import org.hyperledger.fabric.client.identity.*;
+
+    public static void main(final String[] args) throws CommitException, GatewayException, InterruptedException {
+        Reader certReader = Files.newBufferedReader(certificatePath);
+        X509Certificate certificate = Identities.readX509Certificate(certReader);
+        Identity identity = new X509Identity("mspId", certificate);
+
+        Reader keyReader = Files.newBufferedReader(privateKeyPath);
+        PrivateKey privateKey = Identities.readPrivateKey(keyReader);
+        Signer signer = Signers.newPrivateKeySigner(privateKey);
+
+        ChannelCredentials tlsCredentials = TlsChannelCredentials.newBuilder()
+                .trustManager(Paths.get(tlsRootCertPath).toFile())
+                .build();
+        ManagedChannel grpcChannel = Grpc.newChannelBuilder("gateway.example.org:1337", tlsCredentials)
+                .build();
+
+        Gateway.Builder builder = Gateway.newInstance()
+                .identity(identity)
+                .signer(signer)
+                .connection(grpcChannel);
+
+        try (Gateway gateway = builder.connect()) {
+            Network network = gateway.getNetwork("channelName");
+            Contract contract = network.getContract("chaincodeName");
+
+            byte[] putResult = contract.submitTransaction("put", "time", LocalDateTime.now().toString());
+            System.out.println(new String(putResult, StandardCharsets.UTF_8));
+
+            byte[] getResult = contract.evaluateTransaction("get", "time");
+            System.out.println(new String(getResult, StandardCharsets.UTF_8));
+        } finally {
+            grpcChannel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
+        }
+    }
+    </code></pre>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+avg interval in milliseconds:0.5129999999999996

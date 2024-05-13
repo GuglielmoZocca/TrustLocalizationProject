@@ -1,0 +1,49 @@
+[{
+   "name": "DeviceAdmin1PrivateCollection",
+   "policy": "OR('Org1MSP.member')",
+   "requiredPeerCount": 0,
+   "maxPeerCount": 2,
+   "blockToLive":0,
+   "memberOnlyRead": true,
+   "memberOnlyWrite": true,
+   "endorsementPolicy": {
+     "signaturePolicy": "OR('Org1MSP.member')"
+   }
+ },
+ {
+   "name": "TargetOrg1PrivateCollection",
+   "policy": "OR('Org1MSP.member')",
+   "requiredPeerCount": 0,
+   "maxPeerCount": 2,
+   "blockToLive":0,
+   "memberOnlyRead": true,
+   "memberOnlyWrite": true,
+   "endorsementPolicy": {
+     "signaturePolicy": "OR('Org1MSP.member')"
+   }
+ },
+ {
+   "name": "DeviceAdmin2PrivateCollection",
+   "policy": "OR('Org2MSP.member')",
+   "requiredPeerCount": 0,
+   "maxPeerCount": 2,
+   "blockToLive":0,
+   "memberOnlyRead": true,
+   "memberOnlyWrite": true,
+   "endorsementPolicy": {
+     "signaturePolicy": "OR('Org2MSP.member')"
+   }
+ },
+ {
+   "name": "TargetOrg2PrivateCollection",
+   "policy": "OR('Org2MSP.member')",
+   "requiredPeerCount": 0,
+   "maxPeerCount": 2,
+   "blockToLive":0,
+   "memberOnlyRead": true,
+   "memberOnlyWrite": true,
+   "endorsementPolicy": {
+     "signaturePolicy": "OR('Org2MSP.member')"
+   }
+  }
+]

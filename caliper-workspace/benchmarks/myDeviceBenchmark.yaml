@@ -1,0 +1,17 @@
+test:
+  name: ReadDev-contract-benchmark
+  description: test benchmark
+  workers:
+    number: 1
+  rounds:
+    - label: readDevice
+      description: Read device benchmark
+      txDuration: 10
+      rateControl:
+        type: fixed-load
+        opts:
+          transactionLoad: 1
+      workload:
+        module: workload/readDevice.js
+        arguments:
+          contractId: Position

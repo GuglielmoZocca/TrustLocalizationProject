@@ -1,0 +1,17 @@
+test:
+  name: ReadTarget-contract-benchmark
+  description: test benchmark
+  workers:
+    number: 1
+  rounds:
+    - label: readTarget
+      description: Read Target benchmark
+      txDuration: 10
+      rateControl:
+        type: fixed-load
+        opts:
+          transactionLoad: 1
+      workload:
+        module: workload/readTarget.js
+        arguments:
+          contractId: Position
