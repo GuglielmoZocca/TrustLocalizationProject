@@ -94,20 +94,3 @@ int main(int argc, char **argv){
 }
 
 
-
-// Driver program to test above function 
-/*int main()
-{
-	char originalString[] = "Technology";
-
-	// Encrypt the string
-	printf("Encrypted String: ");
-	encryptDecrypt(originalString);
-	printf("\n");
-
-	// Decrypt the string
-	printf("Decrypted String: ");
-	encryptDecrypt(originalString);
-
-	return 0;
-} */

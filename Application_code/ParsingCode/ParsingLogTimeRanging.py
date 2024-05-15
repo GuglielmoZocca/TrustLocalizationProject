@@ -30,7 +30,7 @@ def parse_file(log_file):
 
 
 
-        f = open(f"AVGtemp[{ini}].txt", "w")
+        f = open(f"/ParsingCode/AVGtemp[{ini}].txt", "w")
         avgTemp = sumTemp/num #avg time
         f.write(f"avg interval in milliseconds:{avgTemp}")
         f.close()

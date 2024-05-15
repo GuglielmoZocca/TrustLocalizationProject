@@ -7,10 +7,10 @@ The target of my research is to give to the structure presented in the paper [A 
 In this section it is explained the structure of the project, what contains every directory and file:
 * Application_code: contains all code concern the Gateway application and how to manage the data come from devices.
   - Chipers: it contains the source code and the program for xor encrypting data from a device
-  - DeviceFiles: it contains files that simulate are utilized to simulate some data calculated by a device. The device “11/a3” are data from the testbed, the others are example used for testing
+  - DeviceFiles: it contains files that simulate are utilized to simulate some data calculated by a device. The device “11:a3” are data from the testbed, the others are example used for testing
   - Device_cript: it contains files that represent the encrypted and hash version of what can be find in DeviceFiles. This are the simulation of the data that can come from devices.
   - LogFiles: contains an example of log that come from an experiment in the testbed.
-  - ParsingCode: it contains some python code for creating the appropriate device data from log “ParsingLogDeviceData.py” and for computing the average time to calculating the ranging “ParsingLogTimeRanging.py”, put ting this information in “AVGtemp[11/a3].txt” (in this case it is considered the device “11/a3”.
+  - ParsingCode: it contains some python code for creating the appropriate device data from log “ParsingLogDeviceData.py” and for computing the average time to calculating the ranging “ParsingLogTimeRanging.py”, put ting this information in “AVGtemp[11:a3].txt” (in this case it is considered the device “11/a3”.
   - main.go: source code of the gateway application.
   - Position_test.go: test code for the correctness of some application functionality.
   - TimeAppGateway.txt: List of times that indicates the calculated period of a cycle of target position computation.
@@ -57,7 +57,7 @@ In this section it is explained the structure of the project, what contains ever
   - network.sh: general script to execute various operations with Hyperledger Fabric deployed.
   - scripts: it contains some scripts to operate with the built blockchain.
   - setOrgEnv.sh: script for update some environment variable.
-  - system-genesis-block: it will contains the genesis block of the blockchain.
+  - system-genesis-block: it will contain the genesis block of the blockchain.
   - organizations: Currently contains the configuration code that will be used in the initialization of the blockchain for the creation of the cryptographic material of the participants of the indicated organizations and the order nodes. The cryptographic material will put in this directory.
 
 ### TEST
@@ -66,33 +66,33 @@ To test the project you must follow following instruction:
 1. Clone the project.
 2. Install all [prerequisite](https://hyperledger-fabric.readthedocs.io/en/latest/prereqs.html).
 3. Download the necessary images in docker:
-   1. curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh.
-   2. ./install-fabric.sh d.
+   1. `curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh`
+   2. `./install-fabric.sh d`
 4. Go to the network directory: cd Path/to/Network  .
-5. Build a Hyperledger Fabric blockchain and deploy the smart contract PositionContract: ./initialize_for_test.sh.
+5. Build a Hyperledger Fabric blockchain and deploy the smart contract PositionContract: `./initialize_for_test.sh`
 6. For test Gateway and User application.
-   1. cd ../Application_code.
-   2. go test main.go Position_test.go -v.
+   1. `cd ../Application_code`
+   2. `go test main.go Position_test.go -v`
 7. For test Admin application:
-   1. cd ../Conf_code
-   2. go test main.go Conf_test.go -v 
+   1. `cd ../Conf_code`
+   2. `go test main.go Conf_test.go -v`
 8. For test the performance of chaincode:
-   1. cd ../caliper-workspace
+   1. `cd ../caliper-workspace`
    2. Install the prequisite: Node-version v12.22.10 and NPM version 6.14.16
    3. Install caliper:
-      1. npm init
-      2. npm install --only=prod @hyperledger/caliper-cli@0.5.0
-      3. npx caliper bind --caliper-bind-sut fabric:2.2
-   4. For test the reading of a device: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test
-   5. For test the reading of a target: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test
-   6. For test a cycle of position target calculation: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/totTest.yaml —caliper-flow-only-test
-   7. For test an update of a device by the admin: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test
+      1. `npm init`
+      2. `npm install --only=prod @hyperledger/caliper-cli@0.5.0`
+      3. `npx caliper bind --caliper-bind-sut fabric:2.2`
+   4. For test the reading of a device: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test`
+   5. For test the reading of a target: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test`
+   6. For test a cycle of position target calculation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/totTest.yaml —caliper-flow-only-test`
+   7. For test an update of a device by the admin: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test`
 9. For do some experiments with testbed, that is a device ranging with a target:
    1. Register to CLOVES testbed and install Cooja.
-   2. cd ../uwb-rng-radio-solution
+   2. `cd ../uwb-rng-radio-solution`
    3. Go to website of CLOVES and select map of devices you want to utilize, and download the file with devices information of that map.
    4. Substitute in rng-init.c “linkaddr_t init” with wanted device address (as you can see as example in the file) and “linkaddr_t resp_list[NUM_DEST]” with wanted target address (as you can see as example in the file).
-   5. Compile the code for the ranging: make TARGET=evb1000
+   5. Compile the code for the ranging: `make TARGET=evb1000`
    6. Enter to the website of CLOVES.
    7. Go to Create a Job
    8. In Timeslot info select an island (the map of devices), as start time indicate ASAP and as duration indicate how much time do you want during the experiment.
@@ -100,16 +100,19 @@ To test the project you must follow following instruction:
    10. In binary file 2 insert as hardware evb1000, as Bin file “rng-resp.bin”, as targets the id of node target in respective island.
    11. Start the experiment
    12. After the time indicated in Timeslot info, go to the Download job. Download the experiment result and extract the log.
-   13. Then you can use the parsing code in “../Application_code/ParsingCode/ParsingLogDeviceData.py” passing the log.file to extract the wanted data
-   14. Then you can use the parsing code in “../Application_code/ParsingCode/ParsingLogTimeRanging.py” passing the log.file to calculate the average time to a ranging operation.
+   13. After that you can do some operation on the job file "job.log" obtained: `cd ../Application_code`
+       1. You can use the parsing code in “ParsingCode/ParsingLogDeviceData.py” passing the log file to extract the wanted data in device[idDevice].txt: `ParsingCode/ParsingLogDeviceData.py /PATH/TO/job.log`
+       2. You can use the parsing code in “ParsingCode/ParsingLogTimeRanging.py” passing the log file to calculate the average time for a ranging operation in AVGtemp[idDevice].txt: `ParsingCode/ParsingLogTimeRanging.py /PATH/TO/job.log`
+       3. You can take the data received from the device "/DeviceFiles/device[idDevice].txt" a and encrypt it with a key: `chipers/xor_c "/DeviceFiles/device[idDevice].txt" "/Devices_cript/device[idDevice]_ript.txt" "in" "key"`
+       4. You can use the encrypted for possible test of Gateway and Admin application
 10. To prove Gateway application:
-    1. cd ../Application_code
-    2. Start the application until doesn’t print anything more: go main.go
+    1. `cd ../Application_code`
+    2. Start the application until doesn’t print anything more: `go main.go`
     3. It can also be seen in TimeAppGateway.txt a list of periods of time calculated for every cycle of position target calculation
 11. To prove Admin application:
-    1. cd ../Conf_code
-    2. Start the application and prove some operation suggested: go main.go
+    1. `cd ../Conf_code`
+    2. Start the application and prove some operation suggested: `go main.go`
 12. To prove User application:
-    1. cd ../User_code
-    2. Start the application and prove some operation suggested: go main.go
+    1. `cd ../User_code`
+    2. Start the application and prove some operation suggested: `go main.go`
 

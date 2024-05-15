@@ -32,7 +32,7 @@ def parse_file(log_file):
                 conf = float(d['conf']) #Confidence of device
 
 
-                f = open(f"../DeviceFiles/Device[{init}].txt", "a")
+                f = open(f"DeviceFiles/Device[{init}].txt", "a")
  
                 f.write(f"{init},{resp},{dist},{conf}\n")
                 f.close()
