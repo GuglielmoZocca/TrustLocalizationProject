@@ -1,3 +1,7 @@
+## GOAL
+
+The target of my research is to give to the structure presented in the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461) some feature of scalability and privatization of data in the blockchain, with also the aim to show these new characteristics through an example of possible application building a prototype of the end to end process from device to the user in the case localization case.
+
 ### CODE
 
 In this section it is explained the structure of the project, what contains every directory and file:
@@ -55,3 +59,53 @@ In this section it is explained the structure of the project, what contains ever
   - setOrgEnv.sh: script for update some environment variable.
   - system-genesis-block: it will contains the genesis block of the blockchain.
   - organizations: Currently contains the configuration code that will be used in the initialization of the blockchain for the creation of the cryptographic material of the participants of the indicated organizations and the order nodes. The cryptographic material will put in this directory.
+
+### TEST
+
+To test the project you must follow following instruction:
+1. Clone the project.
+2. Install all [prerequisite](https://hyperledger-fabric.readthedocs.io/en/latest/prereqs.html).
+3. Download the necessary images in docker:
+   1. curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh.
+   2. ./install-fabric.sh d.
+4. Go to the network directory: cd Path/to/Network  .
+5. Build a Hyperledger Fabric blockchain and deploy the smart contract PositionContract: ./initialize_for_test.sh.
+6. For test Gateway and User application.
+   1. cd ../Application_code.
+   2. go test main.go Position_test.go -v.
+7. For test Admin application:
+   1. cd ../Conf_code
+   2. go test main.go Conf_test.go -v 
+8. For test the performance of chaincode:
+   1. cd ../caliper-workspace
+   2. Install the prequisite: Node-version v12.22.10 and NPM version 6.14.16
+   3. For test the reading of a device: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test
+   4. For test the reading of a target: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test
+   5. For test a cycle of position target calculation: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/totTest.yaml —caliper-flow-only-test
+   6. For test an update of a device by the admin: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test
+9. For do some experiments with testbed, that is a device ranging with a target:
+   1. Register to CLOVES testbed and install Cooja.
+   2. cd ../uwb-rng-radio-solution
+   3. Go to website of CLOVES and select map of devices you want to utilize, and download the file with devices information of that map.
+   4. Substitute in rng-init.c “linkaddr_t init” with wanted device address (as you can see as example in the file) and “linkaddr_t resp_list[NUM_DEST]” with wanted target address (as you can see as example in the file).
+   5. Compile the code for the ranging: make TARGET=evb1000
+   6. Enter to the website of CLOVES.
+   7. Go to Create a Job
+   8. In Timeslot info select an island (the map of devices), as start time indicate ASAP and as duration indicate how much time do you want during the experiment.
+   9. In binary file 1 insert as hardware evb1000, as Bin file “rng-init.bin”, as targets the id of node device in respective island.
+   10. In binary file 2 insert as hardware evb1000, as Bin file “rng-resp.bin”, as targets the id of node target in respective island.
+   11. Start the experiment
+   12. After the time indicated in Timeslot info, go to the Download job. Download the experiment result and extract the log.
+   13. Then you can use the parsing code in “../Application_code/ParsingCode/ParsingLogDeviceData.py” passing the log.file to extract the wanted data
+   14. Then you can use the parsing code in “../Application_code/ParsingCode/ParsingLogTimeRanging.py” passing the log.file to calculate the average time to a ranging operation.
+10. To prove Gateway application:
+    1. cd ../Application_code
+    2. Start the application until doesn’t print anything more: go main.go
+    3. It can also be seen in TimeAppGateway.txt a list of periods of time calculated for every cycle of position target calculation
+11. To prove Admin application:
+    1. cd ../Conf_code
+    2. Start the application and prove some operation suggested: go main.go
+12. To prove User application:
+    1. cd ../User_code
+    2. Start the application and prove some operation suggested: go main.go
+
