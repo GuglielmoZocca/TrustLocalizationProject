@@ -10,7 +10,7 @@ In this section it is explained the structure of the project, what contains ever
   - DeviceFiles: it contains files that simulate are utilized to simulate some data calculated by a device. The device “11:a3” are data from the testbed, the others are example used for testing
   - Device_cript: it contains files that represent the encrypted and hash version of what can be find in DeviceFiles. This are the simulation of the data that can come from devices.
   - LogFiles: contains an example of log that come from an experiment in the testbed.
-  - ParsingCode: it contains some python code for creating the appropriate device data from log “ParsingLogDeviceData.py” and for computing the average time to calculating the ranging “ParsingLogTimeRanging.py”, put ting this information in “AVGtemp[11:a3].txt” (in this case it is considered the device “11/a3”.
+  - ParsingCode: it contains some python code for creating the appropriate device data from log “ParsingLogDeviceData.py” and for computing the average time to calculating the ranging “ParsingLogTimeRanging.py”, put ting this information in “AVGtemp[11:a3].txt” (in this case it is considered the device “11:a3”.
   - main.go: source code of the gateway application.
   - Position_test.go: test code for the correctness of some application functionality.
   - TimeAppGateway.txt: List of times that indicates the calculated period of a cycle of target position computation.
@@ -101,9 +101,9 @@ To test the project you must follow following instruction:
    11. Start the experiment
    12. After the time indicated in Timeslot info, go to the Download job. Download the experiment result and extract the log.
    13. After that you can do some operation on the job file "job.log" obtained: `cd ../Application_code`
-       1. You can use the parsing code in “ParsingCode/ParsingLogDeviceData.py” passing the log file to extract the wanted data in device[idDevice].txt: `ParsingCode/ParsingLogDeviceData.py /PATH/TO/job.log`
-       2. You can use the parsing code in “ParsingCode/ParsingLogTimeRanging.py” passing the log file to calculate the average time for a ranging operation in AVGtemp[idDevice].txt: `ParsingCode/ParsingLogTimeRanging.py /PATH/TO/job.log`
-       3. You can take the data received from the device "/DeviceFiles/device[idDevice].txt" a and encrypt it with a key: `chipers/xor_c "/DeviceFiles/device[idDevice].txt" "/Devices_cript/device[idDevice]_ript.txt" "in" "key"`
+       1. You can use the parsing code in “ParsingCode/ParsingLogDeviceData.py” passing the log file to extract the wanted data in device[idDevice].txt where the value of idDevice depend on device id: `ParsingCode/ParsingLogDeviceData.py /PATH/TO/job.log`
+       2. You can use the parsing code in “ParsingCode/ParsingLogTimeRanging.py” passing the log file to calculate the average time for a ranging operation in AVGtemp[idDevice].txt where the value of idDevice depend on device id: `ParsingCode/ParsingLogTimeRanging.py /PATH/TO/job.log`
+       3. You can take the data received from the device "/DeviceFiles/device[idDevice].txt" a and encrypt it with the key (a character) in "/Devices_cript/device[idDevice]_ript.txt": `chipers/xor_c "/DeviceFiles/device[idDevice].txt" "/Devices_cript/device[idDevice]_ript.txt" "in" "key"`
        4. You can use the encrypted for possible test of Gateway and Admin application
 10. To prove Gateway application:
     1. `cd ../Application_code`
