@@ -79,10 +79,14 @@ To test the project you must follow following instruction:
 8. For test the performance of chaincode:
    1. cd ../caliper-workspace
    2. Install the prequisite: Node-version v12.22.10 and NPM version 6.14.16
-   3. For test the reading of a device: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test
-   4. For test the reading of a target: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test
-   5. For test a cycle of position target calculation: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/totTest.yaml —caliper-flow-only-test
-   6. For test an update of a device by the admin: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test
+   3. Install caliper:
+      1. npm init
+      2. npm install --only=prod @hyperledger/caliper-cli@0.5.0
+      3. npx caliper bind --caliper-bind-sut fabric:2.2
+   4. For test the reading of a device: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test
+   5. For test the reading of a target: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test
+   6. For test a cycle of position target calculation: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/totTest.yaml —caliper-flow-only-test
+   7. For test an update of a device by the admin: npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test
 9. For do some experiments with testbed, that is a device ranging with a target:
    1. Register to CLOVES testbed and install Cooja.
    2. cd ../uwb-rng-radio-solution
