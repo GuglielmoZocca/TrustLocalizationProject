@@ -1,6 +1,6 @@
 ## GOAL
 
-The target of my research is to give to the structure presented in the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461) some feature of scalability and privatization of data in the blockchain, with also the aim to show these new characteristics through an example of possible application building a prototype of the end to end process from device to the user in the case localization case. The report of my research can be read in `report.pdf` file.
+The target of my research is to give to the structure presented in the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461) some feature of scalability and privatization of data in the blockchain, with also the aim to show these new characteristics through an example of possible application building a prototype of the end to end process from device to the user in the case localization case. The report of my research can be read in `Report.pdf` file.
 
 ### CODE
 
