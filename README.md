@@ -87,19 +87,20 @@ To test the project you must follow following instruction:
    5. For test the reading of a target: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test`
    6. For test a cycle of position target calculation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/totTest.yaml —caliper-flow-only-test`
    7. For test an update of a device by the admin: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test`
+   8. To see the result of one of this test open "report.html".
 9. For do some experiments with testbed, that is a device ranging with a target:
-   1. Register to CLOVES testbed and install Cooja.
+   1. Register to [CLOVES](https://iottestbed.disi.unitn.it/cloves/getting-started/) testbed and install Cooja.
    2. `cd ../uwb-rng-radio-solution`
-   3. Go to website of CLOVES and select map of devices you want to utilize, and download the file with devices information of that map.
+   3. Go to website of CLOVES and select [map](https://iottestbed.disi.unitn.it/cloves/infrastructure/) of devices you want to utilize, and download the file with devices information of that map.
    4. Substitute in rng-init.c “linkaddr_t init” with wanted device address (as you can see as example in the file) and “linkaddr_t resp_list[NUM_DEST]” with wanted target address (as you can see as example in the file).
    5. Compile the code for the ranging: `make TARGET=evb1000`
    6. Enter to the website of CLOVES.
-   7. Go to Create a Job
+   7. Go to "Create Job"
    8. In Timeslot info select an island (the map of devices), as start time indicate ASAP and as duration indicate how much time do you want during the experiment.
    9. In binary file 1 insert as hardware evb1000, as Bin file “rng-init.bin”, as targets the id of node device in respective island.
    10. In binary file 2 insert as hardware evb1000, as Bin file “rng-resp.bin”, as targets the id of node target in respective island.
    11. Start the experiment
-   12. After the time indicated in Timeslot info, go to the Download job. Download the experiment result and extract the log.
+   12. After the time indicated in Timeslot info, go to the "Download jobs". Download the experiment result and extract the log.
    13. After that you can do some operation on the job file "job.log" obtained: `cd ../Application_code`
        1. You can use the parsing code in “ParsingCode/ParsingLogDeviceData.py” passing the log file to extract the wanted data in device[idDevice].txt where the value of idDevice depend on device id: `ParsingCode/ParsingLogDeviceData.py /PATH/TO/job.log`
        2. You can use the parsing code in “ParsingCode/ParsingLogTimeRanging.py” passing the log file to calculate the average time for a ranging operation in AVGtemp[idDevice].txt where the value of idDevice depend on device id: `ParsingCode/ParsingLogTimeRanging.py /PATH/TO/job.log`

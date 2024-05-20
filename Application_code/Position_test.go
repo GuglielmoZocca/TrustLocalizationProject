@@ -902,8 +902,8 @@ func TestSeeTargetNOTUpdatedAsUserOrg1(t *testing.T) {
 
 }
 
-// TestSeeTargetAsUserOrg2 test access to the target as User of organization 2
-func TestSeeTargetAsUserOrg2(t *testing.T) {
+// TestSeeTargetAsUserOrg2 test access to the target as Admin of organization 2
+func TestSeeTargetAsAdminOrg2(t *testing.T) {
 	initL(1, "A")
 
 	idTarget := "7"
@@ -951,14 +951,14 @@ func TestSeeTargetAsUserOrg2(t *testing.T) {
 	clientConnection.Close()
 	gw.Close()
 
-	initL(2, "U")
+	initL(2, "A")
 
 	err, _ = seeDataTarget(contract, idTarget)
 	if err == nil {
 		t.Fatalf(`Must not be able to read the target , want not nil error`)
 	}
 
-	t.Logf("User can't read a target of different organization: %q", err)
+	t.Logf("Admin can't read a target of different organization: %q", err)
 
 	clientConnection.Close()
 	gw.Close()

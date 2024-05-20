@@ -58,8 +58,8 @@ const (
 	threashconf = 0.7                             //threshold that indicate when a confidence value is high or low
 	threashev   = 0                               //threshold that indicate when an evidence value is high or low
 	collectionD = "DeviceAdmin1PrivateCollection" //Collection where are memorized the devices
-	collectionT = "TargetOrg1PrivateCollection"   //Collection where are memorized the targets
-	treshErr    = 0.01                            //threshold that indicate when an evidence value is high or low
+	collectionT = "TargetOrg1PrivateCollection"   //Collection where are memorized the target
+	treshErr    = 0.01                            //threshold that indicate the maximum error for the calculation of the position
 	mrep        = 20                              //max reputation
 	numbRead    = 6                               //Dimension of a batch of observations to read before compute an average of the observation
 )
