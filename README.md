@@ -20,15 +20,19 @@ In this section it is explained the directory structure of the project, what con
   - benchmarks: it contains the configuration files for the different test on chaincode.
     + myDeviceBenchmark.yaml: configuration file for reading device test.
     + ReadTargetBenchmark.yaml: configuration file for reading target test.
-    + totTest.yaml: configuration file for calculation position target test.
+    + addObsTest.yaml: configuration file for adding device observation test.
+    + updateEvTrustRepTest.yaml: configuration file for test the updating of evidence, reputation and trust.
+    + positionTest: configuration file for position computation test
     + UpdateDTest.yaml: configuration file for updating device test.
   - networks: it contains the configuration file for the network, organizations and accounts to consider in caliper test.
   - node_modules: it contains node.js modules utilized in caliper test.
   - workload: it contains the code used for test.
     + readDevice.js: test code for reading device.
-    + ReadTargetBenchmark.yaml: test code for reading target.
-     + tot_test.js: test code for calculation position target.
-     + UpdateDevice.js: test code for updating device.
+    + readTarget.js: test code for reading target.
+    + addObs.js: test code for adding the device observation.
+    + updateEvTrustRep.js: test code for updating the evidence, reputation and trust.
+    + position.js: test code for position computation.
+    + UpdateDevice.js: test code for updating device.
 * Chaincode_dir: it contains the logic of chaincode, that is the project contract.
   - main.go: source code used for installation of the contract in the blockchain.
   - collections_config.json: configuration file that describes the collections used in the blockchain.
@@ -85,9 +89,11 @@ To test the project you must follow the following instructions:
       3. `npx caliper bind --caliper-bind-sut fabric:2.2`
    4. For test the device reading: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test`
    5. For test the target reading: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test`
-   6. For test a cycle of position target calculation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/totTest.yaml —caliper-flow-only-test`
-   7. For test an update of a device by an admin: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test`
-   8. To see the result of one of this test open "report.html".
+   6. For test an add of a device observation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/addObsTest.yaml —caliper-flow-only-test`
+   7. For test an update of evidence, reputation and trust: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/updateEvTrustRepTest.yaml —caliper-flow-only-test`
+   8. For test a position computation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/positionTest.yaml —caliper-flow-only-test`
+   9. For test an update of a device by an admin: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test`
+   10. To see the result of one of this test open "report.html".
 9. For do some experiments with testbed, that is a ranging operation between a device and a target:
    1. Register to [CLOVES](https://iottestbed.disi.unitn.it/cloves/getting-started/) testbed and install Cooja.
    2. `cd ../uwb-rng-radio-solution`
@@ -116,4 +122,7 @@ To test the project you must follow the following instructions:
 12. To prove User application:
     1. `cd ../User_code`
     2. Start the application and prove some operation suggested: `go main.go`
+13. To stop the test:
+    1. `cd ../Network`
+    2. `./network.sh down`
 

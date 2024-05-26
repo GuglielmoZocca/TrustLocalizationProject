@@ -88,24 +88,9 @@ class MyWorkload extends WorkloadModuleBase {
 
     }
 
-    //Calculate the target position
+    //Add device observations
     async submitTransaction() {
 
-        /*let device1Data = {deviceID: "12:22"};
-
-        let tmapData = Buffer.from(JSON.stringify(device1Data));
-
-
-        const myArgs = {
-            contractId: this.roundArguments.contractId,
-            contractFunction: 'ReadDevice',
-            invokerIdentity: 'Admin',
-            contractArguments: ["DeviceAdmin1PrivateCollection"],
-            transientMap: {device_data: tmapData},
-            readOnly: true
-        };
-
-        await this.sutAdapter.sendRequests(myArgs);*/
 
         let deviceobsData = {deviceID: "12:22", observation: 3162, Confidence:1, MinConf: 0.4, MaxConf: 1};
 
@@ -160,76 +145,6 @@ class MyWorkload extends WorkloadModuleBase {
         };
 
         await this.sutAdapter.sendRequests(reques2t);
-
-
-        let deviceevData = {deviceID: "12:22", PRH: 2, PRL:1, threashConf: 0.7, threashEv: 0, maxRep: 20};
-
-        let tmapevData = Buffer.from(JSON.stringify(deviceevData));
-
-        console.log(`Worker ${this.workerIndex}: Adds ev to ${assetID}`);
-        const reques3t = {
-            contractId: this.roundArguments.contractId,
-            contractFunction: 'UpdateDeviceEvRep',
-            invokerIdentity: 'Admin',
-            contractArguments: ["DeviceAdmin1PrivateCollection"],
-            targetOrganizations: ["Org1MSP"],
-            transientMap: {Device_properties: tmapevData},
-            readOnly: false
-        };
-
-        await this.sutAdapter.sendRequests(reques3t);
-
-        let deviceev1Data = {deviceID: "12:21", PRH: 2, PRL:1, threashConf: 0.7, threashEv: 0, maxRep: 20};
-
-        let tmapev1Data = Buffer.from(JSON.stringify(deviceev1Data));
-
-        console.log(`Worker ${this.workerIndex}: Adds ev to ${asset1ID}`);
-        const reques4t = {
-            contractId: this.roundArguments.contractId,
-            contractFunction: 'UpdateDeviceEvRep',
-            invokerIdentity: 'Admin',
-            contractArguments: ["DeviceAdmin1PrivateCollection"],
-            targetOrganizations: ["Org1MSP"],
-            transientMap: {Device_properties: tmapev1Data},
-            readOnly: false
-        };
-
-        await this.sutAdapter.sendRequests(reques4t);
-
-        let deviceev2Data = {deviceID: "12:23", PRH: 2, PRL:1, threashConf: 0.7, threashEv: 0, maxRep: 20};
-
-        let tmapev2Data = Buffer.from(JSON.stringify(deviceev2Data));
-
-        console.log(`Worker ${this.workerIndex}: Adds ev to ${asset2ID}`);
-        const reques5t = {
-            contractId: this.roundArguments.contractId,
-            contractFunction: 'UpdateDeviceEvRep',
-            invokerIdentity: 'Admin',
-            contractArguments: ["DeviceAdmin1PrivateCollection"],
-            targetOrganizations: ["Org1MSP"],
-            transientMap: {Device_properties: tmapev2Data},
-            readOnly: false
-        };
-
-        await this.sutAdapter.sendRequests(reques5t);
-
-        let PositionData = { TargetID: "7", ThreshErr: 0.01, DevicesUp: ["12:23","12:21","12:22"]};
-
-        let tmapPotData = Buffer.from(JSON.stringify(PositionData));
-
-        const targetID = `7`;
-        console.log(`Worker ${this.workerIndex}: Calculate position of the target ${targetID}`);
-        const reques6t = {
-            contractId: this.roundArguments.contractId,
-            contractFunction: 'PositionTarget',
-            invokerIdentity: 'Admin',
-            contractArguments: ["DeviceAdmin1PrivateCollection","TargetOrg1PrivateCollection","5/10/2022"],
-            targetOrganizations: ["Org1MSP"],
-            transientMap: {target_Posisiton: tmapPotData},
-            readOnly: false
-        };
-
-        await this.sutAdapter.sendRequests(reques6t);
 
 
 

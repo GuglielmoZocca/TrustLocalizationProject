@@ -262,7 +262,7 @@ func TestInitAsUserOrg1(t *testing.T) {
 		t.Fatalf(`You cannot create as user: %q, want not nil error`, err)
 	}
 
-	t.Logf("You cannot create devices as user:%q", err)
+	t.Logf("A user can’t access the devices collection:%q", err)
 
 	err = Deletedevices(contract, devices)
 	if err == nil {
@@ -325,7 +325,7 @@ func TestInitAsAdminOrg2(t *testing.T) {
 		t.Fatalf(`You cannot create as user: %q, want not nil error`, err)
 	}
 
-	t.Logf("You cannot create devices as client of org2:%q", err)
+	t.Logf("A client can’t access the devices collection of an organization that it doesn’t belong:%q", err)
 
 	err = Deletedevices(contract, devices)
 	if err == nil {
@@ -958,7 +958,7 @@ func TestSeeTargetAsAdminOrg2(t *testing.T) {
 		t.Fatalf(`Must not be able to read the target , want not nil error`)
 	}
 
-	t.Logf("Admin can't read a target of different organization: %q", err)
+	t.Logf("A client can’t access the target collection of an organization that it doesn’t belong: %q", err)
 
 	clientConnection.Close()
 	gw.Close()

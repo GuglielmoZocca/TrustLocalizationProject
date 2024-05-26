@@ -1,18 +1,17 @@
 test:
-  name: Position-contract-benchmark
+  name: UpdateEvTrustRep-contract-benchmark
   description: test benchmark
   workers:
     number: 1
   rounds:
-    - label: PositionTarget
-      description: tot benchmark
-      #txDuration: 10
+    - label: UpdateEvTrustRep
+      description: Update trust evidence and reputation benchmark
       txNumber: 1
       rateControl:
         type: fixed-load
         opts:
           transactionLoad: 1
       workload:
-        module: workload/tot_test.js
+        module: workload/updateEvTrustRep.js
         arguments:
           contractId: Position
