@@ -13,17 +13,16 @@ import (
 	"crypto/x509"
 	"encoding/json"
 	"fmt"
+	"github.com/hyperledger/fabric-gateway/pkg/client"
+	"github.com/hyperledger/fabric-gateway/pkg/identity"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"log"
 	"os"
 	"path"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/hyperledger/fabric-gateway/pkg/client"
-	"github.com/hyperledger/fabric-gateway/pkg/identity"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 // Device data inserted in the ledger
@@ -62,6 +61,7 @@ const (
 	treshErr    = 0.01                            //threshold that indicate the maximum error for the calculation of the position
 	mrep        = 20                              //max reputation
 	numbRead    = 6                               //Dimension of a batch of observations to read before compute an average of the observation
+	timeReadObs = 100                             //Milliseconds to read a device observation from stream
 )
 
 // Info of User in organization 1
@@ -433,7 +433,7 @@ func ReadStreamDevice(idDevice string, c chan string) error {
 		scanner := bufio.NewScanner(f)
 		for scanner.Scan() {
 			//simulate time network and trasmission delay
-			time.Sleep(100 * time.Millisecond)
+			time.Sleep(timeReadObs * time.Millisecond)
 			c <- scanner.Text()
 
 		}

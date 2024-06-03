@@ -1,68 +1,68 @@
 ## GOAL
 
-The target of my research is to give to the structure presented in the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461) some feature of privatization of data in the blockchain, with also the aim to show these new characteristics through an example of possible application building a prototype of the end to end process from device to the user in the case localization case. The report of my research can be read in `Report.pdf` file.
+The aim of our research is to enhance a blockchain structure by incorporating data privatization features, drawing inspiration from the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461). We aim to demonstrate these novel characteristics through an example application—a prototype illustrating an end-to-end process from devices to users for calculating the position of a target. Our goal is to achieve data privatization within the architecture, ensuring that experiment application data stored in the blockchain are accessible only to those responsible for the experiment or authorized individuals. We strive to achieve this property without compromising the inherent advantages of blockchain technology, including auditability, integrity, and authenticity.
 
 ### CODE
 
-In this section it is explained the directory structure of the project, what contains every directory and file:
-* Application_code: contains all code concern the Gateway application and how to manage the data that come from devices.
-  - Chipers: it contains the source code and the program for xor encryption algorithm to apply on data from a device.
-  - DeviceFiles: it contains files that simulate some data calculated by a device. The device “11:a3” are data from the testbed, the others are example used for testing.
-  - Device_cript: it contains files that represent the encrypted and hash version of what can be find in DeviceFiles. These are the simulation of the data that come from devices.
-  - LogFiles: contains an example of logs that come from an experiment in the testbed.
-  - ParsingCode: it contains the python code “ParsingLogDeviceData.py” for creating the appropriate device data from log and the python code “ParsingLogTimeRanging.py” for computing the average time to calculate the ranging, putting this information in “AVGtemp[idDevice].txt” (idDevice is the id of considered device).
-  - main.go: source code of the Gateway application.
-  - Position_test.go: test code for testing the correctness, privacy and security of some application functionality.
-  - TimeAppGateway.txt: List of times that indicates the calculated periods of a cycle of target position computation.
-  - pkg: packages used in the Gateway application.
-* bin: command used in the creation of the blockchain.
-* calliper-workspace: it contains the necessary code to evaluate the performance of blockchain code with caliper.
-  - benchmarks: it contains the configuration files for the different test on chaincode.
-    + myDeviceBenchmark.yaml: configuration file for reading device test.
-    + ReadTargetBenchmark.yaml: configuration file for reading target test.
-    + addObsTest.yaml: configuration file for adding device observation test.
-    + updateEvTrustRepTest.yaml: configuration file for test the updating of evidence, reputation and trust.
-    + positionTest: configuration file for position computation test
-    + UpdateDTest.yaml: configuration file for updating device test.
-  - networks: it contains the configuration file for the network, organizations and accounts to consider in caliper test.
-  - node_modules: it contains node.js modules utilized in caliper test.
-  - workload: it contains the code used for test.
-    + readDevice.js: test code for reading device.
-    + readTarget.js: test code for reading target.
-    + addObs.js: test code for adding the device observation.
-    + updateEvTrustRep.js: test code for updating the evidence, reputation and trust.
-    + position.js: test code for position computation.
-    + UpdateDevice.js: test code for updating device.
-* Chaincode_dir: it contains the logic of chaincode, that is the project contract.
-  - main.go: source code used for installation of the contract in the blockchain.
-  - collections_config.json: configuration file that describes the collections used in the blockchain.
-  - chaincode: it contains the code of the contract.
-    + Data_processing.go: It contains all functionalities of the contract that changes the state of the blockchain.
-    + Data_request.go: It contains all functionalities of the contract that ask data from the blockchain.
-* Conf_code: it is the directory of Admin application code.
-  - main.go: source code of the Admin application.
-  - Conf_test.go: test code for testing the correctness, privacy and security of some application functionality.
-* config: it contains configuration files for the blockchain network.
-  - core.yaml and configtx.yaml: channel configuration files.
-  - orderer.yaml: order configuration file.
-* User_code: it is the directory of User application code.
-  - main.go: source code of the User application.
-* uwb-rng-radio-solution: it contains the source codes to do ranging experiment in testbed.
-  - rng-init.c: source code for every device for doing ranging operation. Must change “linkaddr_t init” for every device.
-  - rng-resp.c: source code for the target for doing ranging operation.
-* Report: document that describes the project.
-* Presentation: slides that describe the project.
-* Network: it contains all the files for the network aspect of the blockchain.
-  - bft-config: it contains the configuration file for the blockchain channel in case it is used the PBFT consensus algorithm.
-  - compose: it contains the configuration files to build docker containers.
-  - configtx: it contains the configuration file for the blockchain channel in general case.
-  - initialize_for_test.sh: script for building the Hyperledger fabric structure in case it is used the bft consensus algorithm and the “cryptogen” command for the creation of the cryptographic material. Moreover, the script deploys the contract in the blockchain.
-  - monitordocker.sh: script to check the containers
-  - network.sh: general script to execute various operations with Hyperledger Fabric deployed.
-  - scripts: it contains some scripts to operate with the built blockchain.
-  - setOrgEnv.sh: script for update some environment variable.
+In this section, the project's directory structure and the contents of each directory and file are explained.:
+* Application_code: contains all the code related to the Gateway application, including how to manage the data received from devices.
+  - Chipers: It includes the source code and program for the XOR encryption algorithm, which is applied to data from a device.
+  - DeviceFiles: It contains files that simulate data calculated by a device. The data from the device "11:a3" are actual data from the testbed, while the others are examples used for testing purposes.
+  - Device_cript: It contains files that represent the encrypted and hashed versions of the data found in DeviceFiles, simulating the data transmitted from devices.
+  - LogFiles: It contains an example of logs generated from an experiment conducted in the testbed.
+  - ParsingCode: It contains the Python code "ParsingLogDeviceData.py," which generates the appropriate device data from logs, and "ParsingLogTimeRanging.py," which computes the average time to calculate the ranging. The resulting information is stored in "AVGtemp[idDevice].txt," where idDevice is the ID of the considered device.
+  - main.go: It is the source code of the Gateway application.
+  - Position_test.go: It is the test code designed to verify the correctness, privacy, and security of various application functionalities.
+  - TimeAppGateway.txt: This file contains a list of times representing the calculated durations of a target position computation cycle. These times account for the addition of observations as well as the updates to evidence, reputation, and trust.
+  - pkg: They are the Golang packages used in the Gateway application.
+* bin: These are the commands used for creating the blockchain.
+* calliper-workspace: It contains the necessary code to evaluate the performance of blockchain code using Caliper.
+  - benchmarks: It contains the configuration files for various chaincode tests.
+    + myDeviceBenchmark.yaml: It is the configuration file for reading device test.
+    + ReadTargetBenchmark.yaml: It is the configuration file for reading target test.
+    + addObsTest.yaml: It is the configuration file for adding device observation an confidence test.
+    + updateEvTrustRepTest.yaml: It is the configuration file for test the updating of evidence, reputation and trust.
+    + positionTest: It is the configuration file for position computation test
+    + UpdateDTest.yaml: It is the configuration file for updating device test.
+  - networks: It contains the configuration file detailing the network, organizations, and accounts to be considered in the Caliper tests.
+  - node_modules: it contains node.js modules utilized in Caliper tests.
+  - workload: it contains the code used for Caliper tests.
+    + readDevice.js: It is the test code for reading device.
+    + readTarget.js: It is the test code for reading target.
+    + addObs.js: It is the test code for adding the device observation and confidence.
+    + updateEvTrustRep.js: It is the test code for updating the evidence, reputation and trust.
+    + position.js: It is the test code for position computation.
+    + UpdateDevice.js: It is the test code for updating device.
+* Chaincode_dir: It houses the logic of the chaincode, constituting the project contract.
+  - main.go: It is the source code utilized for installing the contract in the blockchain.
+  - collections_config.json: It is the configuration file that describes the collections used in the blockchain.
+  - chaincode: It contains the source codes of the contract.
+    + Data_processing.go: It is the source code that contains all functionalities of the contract that changes the state of the blockchain.
+    + Data_request.go: It is the source code encompassing all functionalities of the contract that request data from the blockchain.
+* Conf_code: It is the directory of Admin application code.
+  - main.go: It is the source code of the Admin application.
+  - Conf_test.go: It is the test code for testing the correctness, privacy and security of application functionalities.
+* config: It contains configuration files for the blockchain network.
+  - core.yaml and configtx.yaml: They are the channel configuration files.
+  - orderer.yaml: It is the order configuration file.
+* User_code: It is the directory of User application code.
+  - main.go: It is the source code of the User application.
+* uwb-rng-radio-solution: It contains the source codes to do ranging experiment in testbed.
+  - rng-init.c: It consists of the source code for each device for conducting ranging operations. The "linkaddr_t init" must be changed for each device.
+  - rng-resp.c: It is the source code for the target for conducting ranging operation.
+* Report.pdf: It is the document that describes the project.
+* Presentation: They are the slides that describe the project.
+* Network: It includes all the files related to the network aspect of the blockchain.
+  - bft-config: It includes the configuration file for the blockchain channel specifically designed for the PBFT consensus algorithm.
+  - compose: It contains the configuration files to build docker containers.
+  - configtx: It contains the configuration file for the blockchain channel in the general case.
+  - initialize_for_test.sh: It is the script for building the Hyperledger Fabric structure when utilizing the BFT consensus algorithm. Additionally, the script includes the "cryptogen" command for generating cryptographic material. Furthermore, it deploys the contract in the blockchain.
+  - monitordocker.sh: It is the script to check the containers.
+  - network.sh: It ia the general script to execute various operations with Hyperledger Fabric.
+  - scripts: it contains some scripts to operate with the blockchain.
+  - setOrgEnv.sh: It is the script for updating certain environment variables
   - system-genesis-block: it will contain the blockchain genesis block.
-  - organizations: Currently contains the configuration files that will be used in the initialization of the blockchain for the cryptographic material creation of the organizations members and the order nodes. The cryptographic material will be put in this directory.
+  - organizations: Currently, this directory contains the configuration files essential for initializing the blockchain. These files are utilized in creating cryptographic material for the members of organizations and the order nodes. The resulting cryptographic material will be stored within this directory.
 
 ### TEST
 
@@ -74,55 +74,55 @@ To test the project you must follow the following instructions:
    2. `./install-fabric.sh d`
 4. Go to the network directory: cd Path/to/Network  .
 5. Build a Hyperledger Fabric blockchain and deploy the smart contract "PositionContract": `./initialize_for_test.sh`
-6. For test Gateway and User application:
+6. For testing Gateway and User applications:
    1. `cd ../Application_code`
    2. `go test main.go Position_test.go -v`
-7. For test Admin application:
+7. For testing Admin application:
    1. `cd ../Conf_code`
    2. `go test main.go Conf_test.go -v`
-8. For test the chaincode performance:
+8. For testing the chaincode performance:
    1. `cd ../caliper-workspace`
    2. Install the prerequisites: Node-version v12.22.10 and NPM version 6.14.16
    3. Install caliper:
       1. `npm init`
       2. `npm install --only=prod @hyperledger/caliper-cli@0.5.0`
       3. `npx caliper bind --caliper-bind-sut fabric:2.2`
-   4. For test the device reading: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test`
-   5. For test the target reading: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test`
-   6. For test an add of a device observation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/addObsTest.yaml —caliper-flow-only-test`
-   7. For test an update of evidence, reputation and trust: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/updateEvTrustRepTest.yaml —caliper-flow-only-test`
-   8. For test a position computation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/positionTest.yaml —caliper-flow-only-test`
-   9. For test an update of a device by an admin: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test`
-   10. To see the result of one of this test open "report.html".
-9. For do some experiments with testbed, that is a ranging operation between a device and a target:
+   4. For testing reading device data: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myDeviceBenchmark.yaml —caliper-flow-only-test`
+   5. For testing reading target data: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/ReadTargetBenchmark.yaml—caliper-flow-only-test`
+   6. For testing adding a device observation and confidence: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/addObsTest.yaml —caliper-flow-only-test`
+   7. For testing updating evidence, reputation and trust: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/updateEvTrustRepTest.yaml —caliper-flow-only-test`
+   8. For testing position computation: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/positionTest.yaml —caliper-flow-only-test`
+   9. For testing updating device by an admin: `npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/UpdateDTest.yaml —caliper-flow-only-test`
+   10. To see the result of one of these tests, open "report.html".
+9. For conducting experiments with the testbed, which involves ranging operations between a device and a target:
    1. Register to [CLOVES](https://iottestbed.disi.unitn.it/cloves/getting-started/) testbed and install Cooja.
    2. `cd ../uwb-rng-radio-solution`
-   3. Go to website of CLOVES and select [map](https://iottestbed.disi.unitn.it/cloves/infrastructure/) of devices you want to utilize, and download the file with devices information of that map.
-   4. Substitute in rng-init.c “linkaddr_t init” with wanted device address (as you can see as an example in the c file) and “linkaddr_t resp_list[NUM_DEST]” with wanted target address (as you can see as sn example in the c file).
+   3. Go to the CLOVES website and navigate to the [device map](https://iottestbed.disi.unitn.it/cloves/infrastructure/) section. Choose the specific map of devices you intend to utilize and download the corresponding file containing device information.
+   4. Replace "linkaddr_t init" in rng-init.c with the desired device address, as shown in the example in the C file. Also, replace "linkaddr_t resp_list[NUM_DEST]" with the desired target address, following the example provided in the C file.
    5. Compile the source codes for the ranging: `make TARGET=evb1000`
    6. Enter to the CLOVES website.
-   7. Go to "Create Job"
-   8. In Timeslot info select an island (the map of devices), as start time indicate ASAP and as duration indicate how much time do you want the experiment last.
+   7. Go to "Create Job".
+   8. Choose an island (the map of devices) in Timeslot info. Set the start time to ASAP and specify the duration for the experiment.
    9. In binary file 1 insert as hardware "evb1000", as Bin file “rng-init.bin”, as "targets" the id of node device in respective island.
    10. In binary file 2 insert as hardware "evb1000", as Bin file “rng-resp.bin”, as "targets" the id of node target in respective island.
-   11. Start the experiment
-   12. After the time indicated in Timeslot info, go to the "Download jobs". Download the experiment result and extract the log file.
+   11. Start the experiment.
+   12. After the time indicated in Timeslot info, go to the "Download jobs". Download the experiment results and extract the log file.
    13. Then, you can do some operation on the job file "job.log" obtained: `cd ../Application_code`
-       1. You can use the parsing code “ParsingCode/ParsingLogDeviceData.py”, passing the log file, to extract the wanted data in "/DeviceFiles/device[idDevice].txt" where the value of idDevice depend on device id: `ParsingCode/ParsingLogDeviceData.py /PATH/TO/job.log`
-       2. You can use the parsing code “ParsingCode/ParsingLogTimeRanging.py”, passing the log file, to calculate the average time for a ranging operation in AVGtemp[idDevice].txt where the value of idDevice depend on device id: `ParsingCode/ParsingLogTimeRanging.py /PATH/TO/job.log`
-       3. You can take the data received from the device "/DeviceFiles/device[idDevice].txt" and encrypt it with the key (a character) in "/Devices_cript/device[idDevice]_ript.txt": `chipers/xor_c "/DeviceFiles/device[idDevice].txt" "/Devices_cript/device[idDevice]_ript.txt" "in" "key"`
-       4. You can use the encrypted file for possible test of Gateway and Admin application.
-10. To prove Gateway application:
+       1. You can utilize the parsing code located at "ParsingCode/ParsingLogDeviceData.py". By running this code and providing the log file as input, you can extract the desired device data. The extracted data will be stored in "/DeviceFiles/device[idDevice].txt", where the value of idDevice corresponds to the device ID: `ParsingCode/ParsingLogDeviceData.py /PATH/TO/job.log`
+       2. You can utilize the parsing code "ParsingCode/ParsingLogTimeRanging.py" by providing the log file as input to calculate the average time for a ranging operation. The results will be stored in "AVGtemp[idDevice].txt", where the value of idDevice corresponds to the device ID.: `ParsingCode/ParsingLogTimeRanging.py /PATH/TO/job.log`
+       3. You can take the data received from the device "/DeviceFiles/device[idDevice].txt",encrypt it with the key (a character) and store it in "/Devices_cript/device[idDevice]_ript.txt": `chipers/xor_c "/DeviceFiles/device[idDevice].txt" "/Devices_cript/device[idDevice]_ript.txt" "in" "key"`
+       4. You can use the encrypted file for possible tests of Gateway and Admin applications.
+10. To simulate Gateway application:
     1. `cd ../Application_code`
-    2. Start the application until it doesn’t print anything more: `go main.go`
-    3. It can also be seen in TimeAppGateway.txt a list of time periods calculated for every cycle of position target calculation.
-11. To prove Admin application:
+    2. Initiate the application and continue until it ceases printing any further output: `go main.go`
+    3. You can also refer to the "TimeAppGateway.txt" file for a comprehensive list of time periods calculated for each cycle of target position computation, taking into account the addition of observations and the updating of evidence, reputation, and trust.
+11. To simulate Admin application:
     1. `cd ../Conf_code`
-    2. Start the application and prove some operation suggested: `go main.go`
+    2. Start the application and try some operation suggested: `go main.go`
 12. To prove User application:
     1. `cd ../User_code`
-    2. Start the application and prove some operation suggested: `go main.go`
-13. To stop the test:
+    2. Start the application and try some operation suggested: `go main.go`
+13. To stop the test network:
     1. `cd ../Network`
     2. `./network.sh down`
 
