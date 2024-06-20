@@ -1,6 +1,12 @@
 ## GOAL
 
-The aim of our research is to enhance a blockchain structure by incorporating data privatization features, drawing inspiration from the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461). We aim to demonstrate these novel characteristics through an example application—a prototype illustrating an end-to-end process from devices to users for calculating the position of a target. Our goal is to achieve data privatization within the architecture, ensuring that experiment application data stored in the blockchain are accessible only to those responsible for the experiment or authorized individuals. We strive to achieve this property without compromising the inherent advantages of blockchain technology, including auditability, integrity, and authenticity.
+The goals of our work are as follows:
+* The goals of our work are as follows: This setup will include anchor devices to determine the position of a target entity.
+* Implement trust management for IoT devices: Specifically, this system will assess the reputation of each device, evaluate the confidence of its observations, and consider observations from other devices to determine which data should be used for accurately calculating the target's location.
+* Ensure a trustworthy, secure, and decentralized system: Design a system that remains reliable and secure even in the presence of malicious devices or blockchain nodes. This will be achieved through the use of blockchain technology and a robust trust management system for IoT devices.
+* Preserve user privacy within the system: Implement privacy measures to ensure that only participants of an experiment can access its data. Additionally, further privatize data within the same experiment by distinguishing between admin and user clients, ensuring sensitive data is accessible only to those with appropriate permissions.
+* Test the localization operations of devices within a real IoT network to achieve more accurate results.
+Our project takes inspiration from the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461) by Dedeoglu et al. We build on their architecture, composed of gateways and devices. Additionally, we adopted the concept of utilizing a permissioned blockchain for enhanced performance and implemented a trust system for devices to address potential threats posed by malicious entities. However, our work improves user privacy and adds access control to the data.
 
 ### CODE
 
