@@ -6,6 +6,7 @@ The goals of our work are as follows:
 * Ensure a trustworthy, secure, and decentralized system: Design a system that remains reliable and secure even in the presence of malicious devices or blockchain nodes. This will be achieved through the use of blockchain technology and a robust trust management system for IoT devices.
 * Preserve user privacy within the system: Implement privacy measures to ensure that only participants of an experiment can access its data. Additionally, further privatize data within the same experiment by distinguishing between admin and user clients, ensuring sensitive data is accessible only to those with appropriate permissions.
 * Test the localization operations of devices within a real IoT network to achieve more accurate results.
+
 Our project takes inspiration from the paper [A Trust Architecture for Blockchain in IoT](https://arxiv.org/pdf/1906.11461) by Dedeoglu et al. We build on their architecture, composed of gateways and devices. Additionally, we adopted the concept of utilizing a permissioned blockchain for enhanced performance and implemented a trust system for devices to address potential threats posed by malicious entities. However, our work improves user privacy and adds access control to the data.
 
 ### CODE
